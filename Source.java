@@ -10,17 +10,29 @@ class Node<T> {
   
   class Source {
     public static <T> Node<T> reverseList(Node<T> head) {
-      // todo
-      return head;
+        Node current = head;
+        Node prev = null;
+        Node next = null;
+
+        // next <- current <- prev
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        head = prev;
+        return head;
     }
     
     public static void main(String[] args) {
         Node<String> x = new Node<>("x");
         Node<String> y = new Node<>("y");
+        Node<String> z = new Node<>("z");
     
         x.next = y; // x -> y
-    
-        reverseList(x); // y -> x
+        y.next = z;
 
         // Printing solution
         Node<String> head = Source.reverseList(x);
